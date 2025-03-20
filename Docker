@@ -1,7 +1,11 @@
-echo "# n8n-nodes-mcp" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/TiagoSievers/n8n-nodes-mcp.git
-git push -u origin main
+FROM n8nio/n8n:latest
+
+# Switch to root user to install npm packages
+USER root
+
+# Install Supabase client
+WORKDIR /usr/local/lib/node_modules/n8n
+RUN npm install @supabase/supabase-js
+
+# Revert to the node user for security purposes
+USER node
