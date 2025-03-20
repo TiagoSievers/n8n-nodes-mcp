@@ -1,11 +1,10 @@
 FROM n8nio/n8n:latest
 
-# Switch to root user to install npm packages
 USER root
 
-# Install Supabase client
+# Instale ambos os pacotes necessários
 WORKDIR /usr/local/lib/node_modules/n8n
 RUN npm install @supabase/supabase-js
+RUN npm install n8n-nodes-mcp
 
-# Revert to the node user for security purposes
 USER node
